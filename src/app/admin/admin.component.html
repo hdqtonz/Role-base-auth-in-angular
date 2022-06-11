@@ -1,0 +1,59 @@
+<div class="card mt-4 text-white bg-dark">
+  <h4 class="card-header">Admin</h4>
+  <div class="card-body text-dark bg-light">
+    <p>Welcome to the <strong>administrators</strong>.</p>
+    <p class="mb-1">All users from secure (admin only) api end point:</p>
+    <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+  </div>
+  <a href="" class="btn btn-success w-100" routerLink="/user/add">+ Add</a>
+</div>
+
+<div class="container">
+  <div class="row">
+    <table class="table table-success table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Age</th>
+          <th scope="col">Role</th>
+          <th scope="col">Delete</th>
+          <th scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let user of users
+              | paginate: { itemsPerPage: 5, currentPage: p, totalItems: total }
+          "
+        >
+          <td>{{ user.first_name + " " + user.last_name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.age }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <button
+              class="btn btn-sm btn-outline-danger"
+              (click)="deleteUser(user._id)"
+            >
+              Delete
+            </button>
+          </td>
+          <td>
+            <a
+              class="btn btn-sm btn-outline-primary"
+              [routerLink]="['/user/', user._id, 'edit']"
+              href=""
+              >Edit</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls
+      class="pageN"
+      (pageChange)="pageChangeEvent($event)"
+    ></pagination-controls>
+  </div>
+</div>

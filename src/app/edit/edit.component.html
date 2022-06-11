@@ -1,0 +1,56 @@
+<div class="container">
+  <h1>Update Post</h1>
+
+  <a href="#" routerLink="/" class="btn btn-outline-primary w-100"
+    >&#x2190; Back</a
+  >
+
+  <div class="editForm">
+    <form class="row g-2" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="col-md-6">
+        <label class="form-label" for="First Name">First Name:</label>
+        <input
+          formControlName="first_name"
+          id="first_name"
+          type="text"
+          [(ngModel)]="user.first_name"
+          class="form-control"
+        />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="Last Name">Last Name:</label>
+        <input
+          formControlName="last_name"
+          id="last_name"
+          type="text"
+          [(ngModel)]="user.last_name"
+          class="form-control"
+        />
+      </div>
+      <div class="col-md-12">
+        <label for="title">Email:</label>
+        <input
+          formControlName="email"
+          id="Email"
+          type="text"
+          [(ngModel)]="user.email"
+          class="form-control"
+        />
+      </div>
+      <div class="col-md-12">
+        <label for="title">Age:</label>
+        <input
+          formControlName="age"
+          id="age"
+          [(ngModel)]="user.age"
+          type="text"
+          class="form-control"
+        />
+      </div>
+
+      <button class="btn btn-dark mt-3" type="submit" [disabled]="!form.valid">
+        Update
+      </button>
+    </form>
+  </div>
+</div>

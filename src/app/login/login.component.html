@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <!-- showError -->
+      <div style="margin-top: 100px"></div>
+      <div *ngIf="errors" class="alert alert-danger mt-5" role="alert">
+        Invelid Details {{ errors }}
+      </div>
+      <div class="login-form text-white p-4">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="row g-3">
+          <h4>Welcome Back</h4>
+          <div class="col-12">
+            <label>Email</label>
+            <input
+              type="text"
+              name="email"
+              formControlName="email"
+              class="form-control"
+              placeholder="Email"
+              [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+            />
+          </div>
+          <div class="col-12">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              formControlName="password"
+              class="form-control"
+              placeholder="Password"
+              [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+            />
+          </div>
+          <div class="col-12">
+            <button
+              [disabled]="!loginForm.valid"
+              type="submit"
+              class="btn btn-dark float-end"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+        <hr class="mt-4" />
+        <div class="col-12">
+          <p class="text-centermb-0">
+            Have not account yet?
+            <a style="color: orange" routerLink="/signup" href="#">Signup</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

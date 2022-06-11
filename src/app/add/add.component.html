@@ -1,0 +1,87 @@
+<div class="card mt-4 text-white text-center">
+  <h4 class="card-header bg-success">Add User</h4>
+</div>
+
+<div class="my-2">
+  <a href="#" routerLink="/admin" class="btn btn-outline-warning w-100"
+    >&#x2190; Back</a
+  >
+</div>
+
+<div *ngIf="newError" class="alert alert-danger" role="alert">
+  <strong>Error:</strong> Please filled the form again
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="addForm">
+      <form class="row g-2" [formGroup]="addform" (ngSubmit)="submit()">
+        <div class="col-md-6">
+          <label class="form-label" for="First Name">First Name:</label>
+          <input
+            formControlName="first_name"
+            id="first_name"
+            type="text"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-6">
+          <label class="form-label" for="Last Name">Last Name:</label>
+          <input
+            formControlName="last_name"
+            id="last_name"
+            type="text"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-12">
+          <label for="title">Email:</label>
+          <input
+            formControlName="email"
+            id="Email"
+            type="text"
+            class="form-control"
+          />
+        </div>
+
+        <div class="col-md-12">
+          <label for="title">Password:</label>
+          <input
+            formControlName="password"
+            id="password"
+            type="password"
+            class="form-control"
+          />
+        </div>
+
+        <div class="col-md-6">
+          <label for="title">Age:</label>
+          <input
+            formControlName="age"
+            id="age"
+            type="number"
+            min="0"
+            max="100"
+            class="form-control"
+          />
+        </div>
+
+        <div class="col-md-6">
+          <label for="title">Role:</label>
+          <select formControlName="role" id="inputState" class="form-select">
+            <option selected>User</option>
+            <option>Admin</option>
+          </select>
+        </div>
+
+        <button
+          class="btn btn-dark mt-5"
+          type="submit"
+          [disabled]="!addform.valid"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
