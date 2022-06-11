@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { first } from 'rxjs';
 import { User } from '../models/user';
 import { AuthService } from '../service/auth.service';
 import { UserService } from '../service/user.service';
