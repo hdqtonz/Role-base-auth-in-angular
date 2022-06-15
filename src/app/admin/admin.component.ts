@@ -1,5 +1,6 @@
 import { JSDocComment } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs';
 import { User } from '../models/user';
@@ -14,10 +15,12 @@ import { UserService } from '../service/user.service';
 export class AdminComponent implements OnInit {
   loading = false;
   users: User[] = [];
+  serchvalue: string = '';
+  sform!: FormGroup;
 
   p = 1;
   limit: any = 5;
-  total: number = 0;
+  total: any;
 
   constructor(
     private userService: UserService,
@@ -26,23 +29,31 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+
+    this.sform = new FormGroup({
+      search: new FormControl(''),
+    });
+
     this.getUser();
   }
 
+  // Getting all User
   getUser() {
     this.userService
-      .getAll(this.p, this.limit)
-      .pipe(first())
+      .getAll(this.p, this.limit, this.serchvalue)
       .subscribe((data) => {
         this.loading = false;
         this.users = data.resuals;
         this.total = data.total;
       });
   }
-  deleteUser(id: string) {
+  // Delete User
+  deleteUser(id: any) {
     const data: any = localStorage.getItem('user');
+    // const data: any = sessionStorage.getItem('user');
+
     const newData = JSON.parse(data);
-    console.log(newData._id);
+
     if (newData._id === id) {
       this.authService.logout();
     }
@@ -53,8 +64,16 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  // paggination event
   pageChangeEvent(event: number) {
     this.p = event;
+    this.getUser();
+  }
+
+  // search submit button
+  submit() {
+    this.p = 1;
+    this.serchvalue = this.sform.value.search;
     this.getUser();
   }
 }

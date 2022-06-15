@@ -10,6 +10,23 @@
 
 <div class="container">
   <div class="row">
+    <div class="bg-dark p-2">
+      <form [formGroup]="sform" (ngSubmit)="submit()" class="d-flex">
+        <input
+          formControlName="search"
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
     <table class="table table-success table-striped">
       <thead>
         <tr>
@@ -25,7 +42,12 @@
         <tr
           *ngFor="
             let user of users
-              | paginate: { itemsPerPage: 5, currentPage: p, totalItems: total }
+              | paginate
+                : {
+                    itemsPerPage: limit,
+                    currentPage: p,
+                    totalItems: total
+                  }
           "
         >
           <td>{{ user.first_name + " " + user.last_name }}</td>

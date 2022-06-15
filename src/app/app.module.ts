@@ -15,6 +15,7 @@ import { AddComponent } from './add/add.component';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { SignupComponent } from './signup/signup.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

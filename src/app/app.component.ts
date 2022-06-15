@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     const data = localStorage.getItem('user');
+    // const data = sessionStorage.getItem('user');
   }
 
   get isAdmin() {
@@ -31,7 +32,7 @@ export class AppComponent implements OnInit {
   }
 
   get isLogdIn() {
-    return this.user && this.user;
+    return this.user ? true : false;
   }
 
   logout() {

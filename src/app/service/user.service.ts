@@ -12,9 +12,9 @@ export class UserService {
   constructor(private _httpClient: HttpClient) {}
 
   // Get all user
-  getAll(p: any, limit: any) {
+  getAll(p: any, limit: any, search: string) {
     return this._httpClient.get<any>(
-      `${environment.apiUrl}/users?page=${p}&limit=${limit}`
+      `${environment.apiUrl}/users?page=${p}&limit=${limit}&search=${search}`
     );
   }
 
@@ -29,7 +29,7 @@ export class UserService {
   }
 
   // Create user by id
-  createNewUser(userdata: any) {
+  createNewUser(userdata: User) {
     return this._httpClient.post(`${environment.apiUrl}/register`, userdata);
   }
 

@@ -25,7 +25,7 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.signupForm = new FormGroup({
-      first_name: new FormControl('', [Validators.required]),
+      first_name: new FormControl('', Validators.required),
       last_name: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
@@ -42,10 +42,12 @@ export class SignupComponent implements OnInit {
   submit() {
     this.userService.createNewUser(this.signupForm.value).subscribe(
       (data) => {
+        console.log(data);
         this.router.navigate(['/login']);
       },
       (err) => {
         this.newError = true;
+        console.log(err);
         // this.router.navigate(['/login']);
       }
     );
